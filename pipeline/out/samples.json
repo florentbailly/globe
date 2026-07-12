@@ -1,0 +1,1242 @@
+{
+  "batailles": [
+    {
+      "qid": "Q48314",
+      "label": "bataille de Waterloo",
+      "annee": 1815,
+      "coord": "Point(4.412222222 50.678055555)",
+      "sitelinks": 93
+    },
+    {
+      "qid": "Q52418",
+      "label": "attaque de Pearl Harbor",
+      "annee": 1941,
+      "coord": "Point(-157.95 21.365)",
+      "sitelinks": 88
+    },
+    {
+      "qid": "Q131969",
+      "label": "bataille des Thermopyles",
+      "annee": -479,
+      "coord": "Point(22.536944444 38.795833333)",
+      "sitelinks": 83
+    },
+    {
+      "qid": "Q131969",
+      "label": "bataille des Thermopyles",
+      "annee": -479,
+      "coord": "Point(22.536944444 38.795833333)",
+      "sitelinks": 83
+    },
+    {
+      "qid": "Q83224",
+      "label": "bataille d'Hastings",
+      "annee": 1066,
+      "coord": "Point(0.4875 50.911944444)",
+      "sitelinks": 80
+    },
+    {
+      "qid": "Q486124",
+      "label": "bataille de Badr",
+      "annee": 624,
+      "coord": "Point(38.766666666 23.733333333)",
+      "sitelinks": 80
+    },
+    {
+      "qid": "Q171416",
+      "label": "bataille de Trafalgar",
+      "annee": 1805,
+      "coord": "Point(-6.2 36.25)",
+      "sitelinks": 78
+    },
+    {
+      "qid": "Q154720",
+      "label": "bataille d'Angleterre",
+      "annee": 1940,
+      "coord": "Point(-2.0 54.0)",
+      "sitelinks": 77
+    },
+    {
+      "qid": "Q31900",
+      "label": "bataille de Marathon",
+      "annee": -489,
+      "coord": "Point(23.978333333 38.118055555)",
+      "sitelinks": 75
+    },
+    {
+      "qid": "Q134114",
+      "label": "bataille d'Austerlitz",
+      "annee": 1805,
+      "coord": "Point(16.7625 49.128055555)",
+      "sitelinks": 75
+    },
+    {
+      "qid": "Q130861",
+      "label": "bataille de Koursk",
+      "annee": 1943,
+      "coord": "Point(36.1 51.7)",
+      "sitelinks": 74
+    },
+    {
+      "qid": "Q165425",
+      "label": "bataille de Lépante",
+      "annee": 1571,
+      "coord": "Point(21.3 38.2)",
+      "sitelinks": 71
+    },
+    {
+      "qid": "Q33570",
+      "label": "bataille de Grunwald",
+      "annee": 1410,
+      "coord": "Point(20.124722222 53.486111111)",
+      "sitelinks": 68
+    },
+    {
+      "qid": "Q173077",
+      "label": "bataille de Poitiers",
+      "annee": 732,
+      "coord": "Point(0.534388888 46.987611111)",
+      "sitelinks": 68
+    },
+    {
+      "qid": "Q178510",
+      "label": "bataille de Mohács",
+      "annee": 1526,
+      "coord": "Point(18.647222222 45.941388888)",
+      "sitelinks": 67
+    },
+    {
+      "qid": "Q179591",
+      "label": "bataille de Cannes",
+      "annee": -215,
+      "coord": "Point(16.1325 41.306388888)",
+      "sitelinks": 66
+    },
+    {
+      "qid": "Q160387",
+      "label": "bataille d'Actium",
+      "annee": -30,
+      "coord": "Point(20.725 38.925)",
+      "sitelinks": 66
+    },
+    {
+      "qid": "Q87779",
+      "label": "bataille de Teutobourg",
+      "annee": 9,
+      "coord": "Point(8.125833333 52.4075)",
+      "sitelinks": 65
+    },
+    {
+      "qid": "Q151290",
+      "label": "bataille de Moscou",
+      "annee": 1941,
+      "coord": "Point(37.632222222 55.752222222)",
+      "sitelinks": 65
+    },
+    {
+      "qid": "Q200855",
+      "label": "bataille de Vienne",
+      "annee": 1683,
+      "coord": "Point(16.335 48.235)",
+      "sitelinks": 65
+    },
+    {
+      "qid": "Q178850",
+      "label": "bataille de Salamine",
+      "annee": -479,
+      "coord": "Point(23.56666667 37.95138889)",
+      "sitelinks": 65
+    },
+    {
+      "qid": "Q184320",
+      "label": "bataille de la Moskova",
+      "annee": 1812,
+      "coord": "Point(35.816666666 55.516666666)",
+      "sitelinks": 64
+    },
+    {
+      "qid": "Q488278",
+      "label": "bataille de Uhud",
+      "annee": 625,
+      "coord": "Point(39.611667 24.503333)",
+      "sitelinks": 64
+    },
+    {
+      "qid": "Q200032",
+      "label": "bataille de Manzikert",
+      "annee": 1071,
+      "coord": "Point(42.539166666 39.144722222)",
+      "sitelinks": 63
+    },
+    {
+      "qid": "Q152486",
+      "label": "bataille de Poltava",
+      "annee": 1709,
+      "coord": "Point(34.552777777 49.631388888)",
+      "sitelinks": 62
+    }
+  ],
+  "guerres": [
+    {
+      "qid": "Q362",
+      "label": "Seconde Guerre mondiale",
+      "annee": 1939,
+      "coord": null,
+      "sitelinks": 291
+    },
+    {
+      "qid": "Q361",
+      "label": "Première Guerre mondiale",
+      "annee": 1914,
+      "coord": null,
+      "sitelinks": 263
+    },
+    {
+      "qid": "Q8683",
+      "label": "guerre froide",
+      "annee": 1945,
+      "coord": null,
+      "sitelinks": 209
+    },
+    {
+      "qid": "Q110999040",
+      "label": "invasion de l'Ukraine par la Russie",
+      "annee": 2022,
+      "coord": null,
+      "sitelinks": 173
+    },
+    {
+      "qid": "Q110999040",
+      "label": "invasion de l'Ukraine par la Russie",
+      "annee": 2022,
+      "coord": null,
+      "sitelinks": 173
+    },
+    {
+      "qid": "Q110999040",
+      "label": "invasion de l'Ukraine par la Russie",
+      "annee": 2022,
+      "coord": null,
+      "sitelinks": 173
+    },
+    {
+      "qid": "Q8676",
+      "label": "guerre de Sécession",
+      "annee": 1865,
+      "coord": null,
+      "sitelinks": 168
+    },
+    {
+      "qid": "Q8676",
+      "label": "guerre de Sécession",
+      "annee": 1861,
+      "coord": null,
+      "sitelinks": 168
+    },
+    {
+      "qid": "Q12546",
+      "label": "croisade",
+      "annee": 1095,
+      "coord": null,
+      "sitelinks": 168
+    },
+    {
+      "qid": "Q12546",
+      "label": "croisade",
+      "annee": 1095,
+      "coord": null,
+      "sitelinks": 168
+    },
+    {
+      "qid": "Q8740",
+      "label": "guerre du Viêt Nam",
+      "annee": 1955,
+      "coord": null,
+      "sitelinks": 167
+    },
+    {
+      "qid": "Q8663",
+      "label": "guerre de Corée",
+      "annee": 1950,
+      "coord": null,
+      "sitelinks": 142
+    },
+    {
+      "qid": "Q2487",
+      "label": "guerre de Trente Ans",
+      "annee": 1618,
+      "coord": null,
+      "sitelinks": 133
+    },
+    {
+      "qid": "Q10859",
+      "label": "guerre d'Espagne",
+      "annee": 1936,
+      "coord": null,
+      "sitelinks": 128
+    },
+    {
+      "qid": "Q12551",
+      "label": "guerre de Cent Ans",
+      "annee": 1337,
+      "coord": null,
+      "sitelinks": 127
+    },
+    {
+      "qid": "Q122962941",
+      "label": "guerre à Gaza depuis 2023",
+      "annee": 2023,
+      "coord": null,
+      "sitelinks": 119
+    },
+    {
+      "qid": "Q122962941",
+      "label": "guerre à Gaza depuis 2023",
+      "annee": 2020,
+      "coord": null,
+      "sitelinks": 119
+    },
+    {
+      "qid": "Q15860072",
+      "label": "guerre russo-ukrainienne",
+      "annee": 2014,
+      "coord": null,
+      "sitelinks": 117
+    },
+    {
+      "qid": "Q15860072",
+      "label": "guerre russo-ukrainienne",
+      "annee": 2100,
+      "coord": null,
+      "sitelinks": 117
+    },
+    {
+      "qid": "Q178810",
+      "label": "guerre civile syrienne",
+      "annee": 2011,
+      "coord": "Point(38.0 35.0)",
+      "sitelinks": 115
+    },
+    {
+      "qid": "Q178810",
+      "label": "guerre civile syrienne",
+      "annee": 2011,
+      "coord": "Point(38.0 35.0)",
+      "sitelinks": 115
+    },
+    {
+      "qid": "Q40949",
+      "label": "guerre d'indépendance des États-Unis",
+      "annee": 1775,
+      "coord": null,
+      "sitelinks": 114
+    },
+    {
+      "qid": "Q37643",
+      "label": "guerre du Golfe",
+      "annee": 1990,
+      "coord": null,
+      "sitelinks": 113
+    },
+    {
+      "qid": "Q33761",
+      "label": "printemps arabe",
+      "annee": 2010,
+      "coord": null,
+      "sitelinks": 112
+    },
+    {
+      "qid": "Q33761",
+      "label": "printemps arabe",
+      "annee": 2010,
+      "coord": null,
+      "sitelinks": 112
+    }
+  ],
+  "personnages": "ERREUR: echec apres 4 tentatives : 504 Server Error: Gateway Timeout for url: https://query.wikidata.org/sparql?query=%0ASELECT+%3Fitem+%3FitemLabel+%3Fdate+%3Fcoord+%3Fsl+WHERE+%7B%0A++%3Fitem+wdt%3AP31+wd%3AQ5+.%0A++%3Fitem+wdt%3AP569+%3Fdate+.%0A++FILTER%28%3Fdate+%3E%3D+%22-3000-01-01T00%3A00%3A00Z%22%5E%5Exsd%3AdateTime%29%0A++OPTIONAL+%7B+%3Fitem+wdt%3AP19+%3Flieu+.+%3Flieu+wdt%3AP625+%3Fcoord+.+%7D%0A++%3Fitem+wikibase%3Asitelinks+%3Fsl+.%0A++FILTER%28%3Fsl+%3E%3D+40%29%0A++SERVICE+wikibase%3Alabel+%7B+bd%3AserviceParam+wikibase%3Alanguage+%22fr%2Cen%22.+%7D%0A%7D%0AORDER+BY+DESC%28%3Fsl%29%0ALIMIT+25&format=json",
+  "inventions": [
+    {
+      "qid": "Q155",
+      "label": "Brésil",
+      "annee": 1500,
+      "coord": null,
+      "sitelinks": 385
+    },
+    {
+      "qid": "Q51",
+      "label": "Antarctique",
+      "annee": 1820,
+      "coord": null,
+      "sitelinks": 314
+    },
+    {
+      "qid": "Q2736",
+      "label": "football",
+      "annee": 1863,
+      "coord": null,
+      "sitelinks": 296
+    },
+    {
+      "qid": "Q68",
+      "label": "ordinateur",
+      "annee": 1945,
+      "coord": null,
+      "sitelinks": 295
+    },
+    {
+      "qid": "Q828",
+      "label": "Amérique",
+      "annee": 1492,
+      "coord": null,
+      "sitelinks": 266
+    },
+    {
+      "qid": "Q324",
+      "label": "Uranus",
+      "annee": 1781,
+      "coord": null,
+      "sitelinks": 259
+    },
+    {
+      "qid": "Q223",
+      "label": "Groenland",
+      "annee": 875,
+      "coord": null,
+      "sitelinks": 254
+    },
+    {
+      "qid": "Q332",
+      "label": "Neptune",
+      "annee": 1846,
+      "coord": null,
+      "sitelinks": 250
+    },
+    {
+      "qid": "Q769",
+      "label": "Grenade",
+      "annee": 1498,
+      "coord": null,
+      "sitelinks": 249
+    },
+    {
+      "qid": "Q1420",
+      "label": "automobile",
+      "annee": 1884,
+      "coord": null,
+      "sitelinks": 245
+    },
+    {
+      "qid": "Q556",
+      "label": "hydrogène",
+      "annee": 1766,
+      "coord": "Point(-2.0 54.6)",
+      "sitelinks": 236
+    },
+    {
+      "qid": "Q629",
+      "label": "oxygène",
+      "annee": 1774,
+      "coord": "Point(15.0 61.0)",
+      "sitelinks": 233
+    },
+    {
+      "qid": "Q84263196",
+      "label": "Covid-19",
+      "annee": 2019,
+      "coord": "Point(114.2975 30.595)",
+      "sitelinks": 226
+    },
+    {
+      "qid": "Q339",
+      "label": "Pluton",
+      "annee": 1930,
+      "coord": null,
+      "sitelinks": 221
+    },
+    {
+      "qid": "Q623",
+      "label": "carbone",
+      "annee": 1789,
+      "coord": null,
+      "sitelinks": 217
+    },
+    {
+      "qid": "Q5372",
+      "label": "basket-ball",
+      "annee": 1891,
+      "coord": null,
+      "sitelinks": 216
+    },
+    {
+      "qid": "Q11035",
+      "label": "téléphone",
+      "annee": 1876,
+      "coord": null,
+      "sitelinks": 215
+    },
+    {
+      "qid": "Q11633",
+      "label": "photographie",
+      "annee": 1839,
+      "coord": null,
+      "sitelinks": 210
+    },
+    {
+      "qid": "Q663",
+      "label": "aluminium",
+      "annee": 1825,
+      "coord": null,
+      "sitelinks": 209
+    },
+    {
+      "qid": "Q560",
+      "label": "hélium",
+      "annee": 1868,
+      "coord": null,
+      "sitelinks": 208
+    },
+    {
+      "qid": "Q12725",
+      "label": "électricité",
+      "annee": 1821,
+      "coord": null,
+      "sitelinks": 208
+    },
+    {
+      "qid": "Q12199",
+      "label": "syndrome d'immunodéficience acquise",
+      "annee": 1959,
+      "coord": "Point(23.656111111 -2.88)",
+      "sitelinks": 208
+    },
+    {
+      "qid": "Q12199",
+      "label": "syndrome d'immunodéficience acquise",
+      "annee": 1959,
+      "coord": "Point(15.311944444 -4.321944444)",
+      "sitelinks": 208
+    },
+    {
+      "qid": "Q11032",
+      "label": "journal",
+      "annee": 1605,
+      "coord": null,
+      "sitelinks": 205
+    },
+    {
+      "qid": "Q627",
+      "label": "azote",
+      "annee": 1772,
+      "coord": "Point(-2.0 54.6)",
+      "sitelinks": 205
+    }
+  ],
+  "oeuvres": [
+    {
+      "qid": "Q428",
+      "label": "Coran",
+      "annee": 631,
+      "coord": null,
+      "sitelinks": 280
+    },
+    {
+      "qid": "Q8275",
+      "label": "Iliade",
+      "annee": -800,
+      "coord": null,
+      "sitelinks": 178
+    },
+    {
+      "qid": "Q39939",
+      "label": "Évangile selon Luc",
+      "annee": 85,
+      "coord": null,
+      "sitelinks": 148
+    },
+    {
+      "qid": "Q25338",
+      "label": "Le Petit Prince",
+      "annee": 1943,
+      "coord": null,
+      "sitelinks": 148
+    },
+    {
+      "qid": "Q25338",
+      "label": "Le Petit Prince",
+      "annee": 1943,
+      "coord": null,
+      "sitelinks": 148
+    },
+    {
+      "qid": "Q480",
+      "label": "Don Quichotte",
+      "annee": 1605,
+      "coord": null,
+      "sitelinks": 147
+    },
+    {
+      "qid": "Q480",
+      "label": "Don Quichotte",
+      "annee": 1615,
+      "coord": null,
+      "sitelinks": 147
+    },
+    {
+      "qid": "Q12418",
+      "label": "La Joconde",
+      "annee": 1503,
+      "coord": null,
+      "sitelinks": 146
+    },
+    {
+      "qid": "Q15228",
+      "label": "Le Seigneur des anneaux",
+      "annee": 1954,
+      "coord": null,
+      "sitelinks": 146
+    },
+    {
+      "qid": "Q40591",
+      "label": "Manifeste du Parti communiste",
+      "annee": 1848,
+      "coord": null,
+      "sitelinks": 143
+    },
+    {
+      "qid": "Q44578",
+      "label": "Titanic",
+      "annee": 1997,
+      "coord": null,
+      "sitelinks": 138
+    },
+    {
+      "qid": "Q208460",
+      "label": "1984",
+      "annee": 1949,
+      "coord": null,
+      "sitelinks": 137
+    },
+    {
+      "qid": "Q208460",
+      "label": "1984",
+      "annee": 1948,
+      "coord": null,
+      "sitelinks": 137
+    },
+    {
+      "qid": "Q134773",
+      "label": "Q134773",
+      "annee": 1994,
+      "coord": null,
+      "sitelinks": 136
+    },
+    {
+      "qid": "Q134773",
+      "label": "Q134773",
+      "annee": 1994,
+      "coord": null,
+      "sitelinks": 136
+    },
+    {
+      "qid": "Q134773",
+      "label": "Q134773",
+      "annee": 1994,
+      "coord": null,
+      "sitelinks": 136
+    },
+    {
+      "qid": "Q134773",
+      "label": "Q134773",
+      "annee": 1994,
+      "coord": null,
+      "sitelinks": 136
+    },
+    {
+      "qid": "Q134773",
+      "label": "Q134773",
+      "annee": 1994,
+      "coord": null,
+      "sitelinks": 136
+    },
+    {
+      "qid": "Q8272",
+      "label": "Épopée de Gilgamesh",
+      "annee": -2100,
+      "coord": null,
+      "sitelinks": 133
+    },
+    {
+      "qid": "Q8279",
+      "label": "Livre des Rois",
+      "annee": 1000,
+      "coord": null,
+      "sitelinks": 130
+    },
+    {
+      "qid": "Q8279",
+      "label": "Livre des Rois",
+      "annee": 1011,
+      "coord": null,
+      "sitelinks": 130
+    },
+    {
+      "qid": "Q40185",
+      "label": "La Divine Comédie",
+      "annee": 1320,
+      "coord": null,
+      "sitelinks": 129
+    },
+    {
+      "qid": "Q47703",
+      "label": "Le Parrain",
+      "annee": 1972,
+      "coord": null,
+      "sitelinks": 128
+    },
+    {
+      "qid": "Q47703",
+      "label": "Le Parrain",
+      "annee": 1972,
+      "coord": null,
+      "sitelinks": 128
+    },
+    {
+      "qid": "Q47703",
+      "label": "Le Parrain",
+      "annee": 1972,
+      "coord": null,
+      "sitelinks": 128
+    }
+  ],
+  "traites": [
+    {
+      "qid": "Q8736",
+      "label": "traité de Versailles",
+      "annee": 1919,
+      "coord": null,
+      "sitelinks": 135
+    },
+    {
+      "qid": "Q8736",
+      "label": "traité de Versailles",
+      "annee": 1919,
+      "coord": null,
+      "sitelinks": 135
+    },
+    {
+      "qid": "Q171328",
+      "label": "Charte des Nations unies",
+      "annee": 1945,
+      "coord": "Point(-122.4164 37.7775)",
+      "sitelinks": 111
+    },
+    {
+      "qid": "Q171328",
+      "label": "Charte des Nations unies",
+      "annee": 1945,
+      "coord": "Point(-122.4164 37.7775)",
+      "sitelinks": 111
+    },
+    {
+      "qid": "Q130796",
+      "label": "Pacte germano-soviétique",
+      "annee": 1939,
+      "coord": null,
+      "sitelinks": 105
+    },
+    {
+      "qid": "Q130796",
+      "label": "Pacte germano-soviétique",
+      "annee": 1939,
+      "coord": null,
+      "sitelinks": 105
+    },
+    {
+      "qid": "Q130796",
+      "label": "Pacte germano-soviétique",
+      "annee": 1939,
+      "coord": null,
+      "sitelinks": 105
+    },
+    {
+      "qid": "Q130796",
+      "label": "Pacte germano-soviétique",
+      "annee": 1939,
+      "coord": null,
+      "sitelinks": 105
+    },
+    {
+      "qid": "Q46362",
+      "label": "congrès de Vienne",
+      "annee": 1815,
+      "coord": "Point(16.363805555 48.2085)",
+      "sitelinks": 98
+    },
+    {
+      "qid": "Q47359",
+      "label": "protocole de Kyoto",
+      "annee": 1997,
+      "coord": null,
+      "sitelinks": 93
+    },
+    {
+      "qid": "Q466087",
+      "label": "Convention relative aux droits de l'enfant",
+      "annee": 1989,
+      "coord": null,
+      "sitelinks": 92
+    },
+    {
+      "qid": "Q466087",
+      "label": "Convention relative aux droits de l'enfant",
+      "annee": 1989,
+      "coord": null,
+      "sitelinks": 92
+    },
+    {
+      "qid": "Q466087",
+      "label": "Convention relative aux droits de l'enfant",
+      "annee": 1989,
+      "coord": null,
+      "sitelinks": 92
+    },
+    {
+      "qid": "Q466087",
+      "label": "Convention relative aux droits de l'enfant",
+      "annee": 1989,
+      "coord": null,
+      "sitelinks": 92
+    },
+    {
+      "qid": "Q466087",
+      "label": "Convention relative aux droits de l'enfant",
+      "annee": 1989,
+      "coord": null,
+      "sitelinks": 92
+    },
+    {
+      "qid": "Q466087",
+      "label": "Convention relative aux droits de l'enfant",
+      "annee": 1989,
+      "coord": null,
+      "sitelinks": 92
+    },
+    {
+      "qid": "Q154255",
+      "label": "accords de Munich",
+      "annee": 1938,
+      "coord": "Point(11.5678 48.1461)",
+      "sitelinks": 86
+    },
+    {
+      "qid": "Q21707860",
+      "label": "accord universel des négociations climatiques de Paris",
+      "annee": 2015,
+      "coord": "Point(2.3522 48.8567)",
+      "sitelinks": 86
+    },
+    {
+      "qid": "Q154255",
+      "label": "accords de Munich",
+      "annee": 1938,
+      "coord": "Point(11.5678 48.1461)",
+      "sitelinks": 86
+    },
+    {
+      "qid": "Q21707860",
+      "label": "accord universel des négociations climatiques de Paris",
+      "annee": 2015,
+      "coord": "Point(2.3522 48.8567)",
+      "sitelinks": 86
+    },
+    {
+      "qid": "Q2822795",
+      "label": "accord de Schengen",
+      "annee": 1985,
+      "coord": "Point(6.36 49.47)",
+      "sitelinks": 83
+    },
+    {
+      "qid": "Q11146",
+      "label": "traité de Maastricht",
+      "annee": 1992,
+      "coord": null,
+      "sitelinks": 83
+    },
+    {
+      "qid": "Q182814",
+      "label": "traité sur l'Antarctique",
+      "annee": 1959,
+      "coord": null,
+      "sitelinks": 81
+    },
+    {
+      "qid": "Q182814",
+      "label": "traité sur l'Antarctique",
+      "annee": 1959,
+      "coord": null,
+      "sitelinks": 81
+    },
+    {
+      "qid": "Q150995",
+      "label": "traités de Westphalie",
+      "annee": 1648,
+      "coord": null,
+      "sitelinks": 81
+    }
+  ],
+  "etats": [
+    {
+      "qid": "Q30",
+      "label": "États-Unis",
+      "annee": 1784,
+      "coord": "Point(-98.5795 39.828175)",
+      "sitelinks": 424
+    },
+    {
+      "qid": "Q30",
+      "label": "États-Unis",
+      "annee": 1784,
+      "coord": "Point(-98.5795 39.828175)",
+      "sitelinks": 424
+    },
+    {
+      "qid": "Q43",
+      "label": "Turquie",
+      "annee": 1923,
+      "coord": "Point(36.0 39.0)",
+      "sitelinks": 419
+    },
+    {
+      "qid": "Q43",
+      "label": "Turquie",
+      "annee": 1923,
+      "coord": "Point(36.0 39.0)",
+      "sitelinks": 419
+    },
+    {
+      "qid": "Q159",
+      "label": "Russie",
+      "annee": 1263,
+      "coord": "Point(94.25 66.416666666)",
+      "sitelinks": 418
+    },
+    {
+      "qid": "Q159",
+      "label": "Russie",
+      "annee": 1263,
+      "coord": "Point(94.25 66.416666666)",
+      "sitelinks": 418
+    },
+    {
+      "qid": "Q142",
+      "label": "France",
+      "annee": 481,
+      "coord": "Point(2.0 47.0)",
+      "sitelinks": 416
+    },
+    {
+      "qid": "Q142",
+      "label": "France",
+      "annee": 843,
+      "coord": "Point(2.0 47.0)",
+      "sitelinks": 416
+    },
+    {
+      "qid": "Q142",
+      "label": "France",
+      "annee": 1804,
+      "coord": "Point(2.0 47.0)",
+      "sitelinks": 416
+    },
+    {
+      "qid": "Q142",
+      "label": "France",
+      "annee": 481,
+      "coord": "Point(2.0 47.0)",
+      "sitelinks": 416
+    },
+    {
+      "qid": "Q142",
+      "label": "France",
+      "annee": 843,
+      "coord": "Point(2.0 47.0)",
+      "sitelinks": 416
+    },
+    {
+      "qid": "Q142",
+      "label": "France",
+      "annee": 1804,
+      "coord": "Point(2.0 47.0)",
+      "sitelinks": 416
+    },
+    {
+      "qid": "Q17",
+      "label": "Japon",
+      "annee": 1947,
+      "coord": "Point(136.0 35.0)",
+      "sitelinks": 415
+    },
+    {
+      "qid": "Q17",
+      "label": "Japon",
+      "annee": 1947,
+      "coord": "Point(136.0 35.0)",
+      "sitelinks": 415
+    },
+    {
+      "qid": "Q38",
+      "label": "Italie",
+      "annee": 476,
+      "coord": "Point(12.5 42.5)",
+      "sitelinks": 406
+    },
+    {
+      "qid": "Q38",
+      "label": "Italie",
+      "annee": 1861,
+      "coord": "Point(12.5 42.5)",
+      "sitelinks": 406
+    },
+    {
+      "qid": "Q38",
+      "label": "Italie",
+      "annee": 1946,
+      "coord": "Point(12.5 42.5)",
+      "sitelinks": 406
+    },
+    {
+      "qid": "Q38",
+      "label": "Italie",
+      "annee": 476,
+      "coord": "Point(12.5 42.5)",
+      "sitelinks": 406
+    },
+    {
+      "qid": "Q38",
+      "label": "Italie",
+      "annee": 1861,
+      "coord": "Point(12.5 42.5)",
+      "sitelinks": 406
+    },
+    {
+      "qid": "Q38",
+      "label": "Italie",
+      "annee": 1946,
+      "coord": "Point(12.5 42.5)",
+      "sitelinks": 406
+    },
+    {
+      "qid": "Q183",
+      "label": "Allemagne",
+      "annee": 1949,
+      "coord": "Point(10.0 51.0)",
+      "sitelinks": 403
+    },
+    {
+      "qid": "Q183",
+      "label": "Allemagne",
+      "annee": 1949,
+      "coord": "Point(10.0 51.0)",
+      "sitelinks": 403
+    },
+    {
+      "qid": "Q33",
+      "label": "Finlande",
+      "annee": 1917,
+      "coord": "Point(27.0 65.0)",
+      "sitelinks": 401
+    },
+    {
+      "qid": "Q33",
+      "label": "Finlande",
+      "annee": 1917,
+      "coord": "Point(27.0 65.0)",
+      "sitelinks": 401
+    },
+    {
+      "qid": "Q668",
+      "label": "Inde",
+      "annee": 1947,
+      "coord": "Point(83.0 22.8)",
+      "sitelinks": 400
+    }
+  ],
+  "catastrophes": [
+    {
+      "qid": "Q10806",
+      "label": "attentats du 11 septembre 2001",
+      "annee": 2001,
+      "coord": null,
+      "sitelinks": 167
+    },
+    {
+      "qid": "Q10806",
+      "label": "attentats du 11 septembre 2001",
+      "annee": 2001,
+      "coord": null,
+      "sitelinks": 167
+    },
+    {
+      "qid": "Q10806",
+      "label": "attentats du 11 septembre 2001",
+      "annee": 2001,
+      "coord": null,
+      "sitelinks": 167
+    },
+    {
+      "qid": "Q80034",
+      "label": "génocide arménien",
+      "annee": 1915,
+      "coord": null,
+      "sitelinks": 125
+    },
+    {
+      "qid": "Q486",
+      "label": "catastrophe nucléaire de Tchernobyl",
+      "annee": 1986,
+      "coord": "Point(30.099169444 51.389438888)",
+      "sitelinks": 125
+    },
+    {
+      "qid": "Q486",
+      "label": "catastrophe nucléaire de Tchernobyl",
+      "annee": 1986,
+      "coord": "Point(30.099169444 51.389438888)",
+      "sitelinks": 125
+    },
+    {
+      "qid": "Q21479779",
+      "label": "attentats du 13 novembre 2015 en Île-de-France",
+      "annee": 2015,
+      "coord": "Point(2.370638888 48.863027777)",
+      "sitelinks": 101
+    },
+    {
+      "qid": "Q36204",
+      "label": "séisme de 2011 de la côte Pacifique du Tōhoku",
+      "annee": 2011,
+      "coord": "Point(142.369 38.322)",
+      "sitelinks": 92
+    },
+    {
+      "qid": "Q36204",
+      "label": "séisme de 2011 de la côte Pacifique du Tōhoku",
+      "annee": 2011,
+      "coord": "Point(142.369 38.322)",
+      "sitelinks": 92
+    },
+    {
+      "qid": "Q36204",
+      "label": "séisme de 2011 de la côte Pacifique du Tōhoku",
+      "annee": 2011,
+      "coord": "Point(142.369 38.322)",
+      "sitelinks": 92
+    },
+    {
+      "qid": "Q36204",
+      "label": "séisme de 2011 de la côte Pacifique du Tōhoku",
+      "annee": 2011,
+      "coord": "Point(142.369 38.322)",
+      "sitelinks": 92
+    },
+    {
+      "qid": "Q36204",
+      "label": "séisme de 2011 de la côte Pacifique du Tōhoku",
+      "annee": 2011,
+      "coord": "Point(142.369 38.322)",
+      "sitelinks": 92
+    },
+    {
+      "qid": "Q116691303",
+      "label": "séismes de 2023 en Turquie et Syrie",
+      "annee": 2023,
+      "coord": "Point(37.032 37.174)",
+      "sitelinks": 90
+    },
+    {
+      "qid": "Q99717",
+      "label": "manifestations de la place Tian'anmen",
+      "annee": 1989,
+      "coord": "Point(116.391666666 39.903333333)",
+      "sitelinks": 89
+    },
+    {
+      "qid": "Q79967",
+      "label": "attentats de 2011 en Norvège",
+      "annee": 2011,
+      "coord": null,
+      "sitelinks": 87
+    },
+    {
+      "qid": "Q131297",
+      "label": "génocide contre les Tutsis de 1994",
+      "annee": 1994,
+      "coord": null,
+      "sitelinks": 87
+    },
+    {
+      "qid": "Q79967",
+      "label": "attentats de 2011 en Norvège",
+      "annee": 2011,
+      "coord": null,
+      "sitelinks": 87
+    },
+    {
+      "qid": "Q130754",
+      "label": "séisme et tsunami de 2004 dans l'océan Indien",
+      "annee": 2004,
+      "coord": "Point(95.982 3.295)",
+      "sitelinks": 86
+    },
+    {
+      "qid": "Q130754",
+      "label": "séisme et tsunami de 2004 dans l'océan Indien",
+      "annee": 2004,
+      "coord": "Point(95.982 3.295)",
+      "sitelinks": 86
+    },
+    {
+      "qid": "Q130754",
+      "label": "séisme et tsunami de 2004 dans l'océan Indien",
+      "annee": 2004,
+      "coord": "Point(95.982 3.295)",
+      "sitelinks": 86
+    },
+    {
+      "qid": "Q130754",
+      "label": "séisme et tsunami de 2004 dans l'océan Indien",
+      "annee": 2004,
+      "coord": "Point(95.982 3.295)",
+      "sitelinks": 86
+    },
+    {
+      "qid": "Q127421251",
+      "label": "tentative d'assassinat de Donald Trump",
+      "annee": 2024,
+      "coord": "Point(-79.971 40.857027777)",
+      "sitelinks": 84
+    },
+    {
+      "qid": "Q127421251",
+      "label": "tentative d'assassinat de Donald Trump",
+      "annee": 2024,
+      "coord": "Point(-79.971 40.857027777)",
+      "sitelinks": 84
+    },
+    {
+      "qid": "Q43777",
+      "label": "séisme de 2010 à Haïti",
+      "annee": 2010,
+      "coord": "Point(-72.445194444 18.451388888)",
+      "sitelinks": 83
+    },
+    {
+      "qid": "Q43777",
+      "label": "séisme de 2010 à Haïti",
+      "annee": 2010,
+      "coord": "Point(-72.445194444 18.451388888)",
+      "sitelinks": 83
+    }
+  ]
+}

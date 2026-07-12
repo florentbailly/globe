@@ -1,0 +1,42 @@
+{
+  "batailles": {
+    "100": 0,
+    "40": 101,
+    "15": 1112
+  },
+  "guerres": {
+    "100": 22,
+    "40": 216,
+    "15": 743
+  },
+  "personnages": {
+    "100": "ERREUR: echec apres 4 tentatives : 504 Server Error: Gateway Timeout for url: https://query.wikidata.org/sparql?query=%0ASELECT+%28COUNT%28DISTINCT+%3Fitem%29+AS+%3Fc%29+WHERE+%7B%0A++%3Fitem+wdt%3AP31+wd%3AQ5+.%0A++%3Fitem+wdt%3AP569+%3Fdate+.%0A++FILTER%28%3Fdate+%3E%3D+%22-3000-01-01T00%3A00%3A00Z%22%5E%5Exsd%3AdateTime%29%0A++%3Fitem+wikibase%3Asitelinks+%3Fsl+.%0A++FILTER%28%3Fsl+%3E%3D+100%29%0A%7D&format=json",
+    "40": "ERREUR: echec apres 4 tentatives : 504 Server Error: Gateway Timeout for url: https://query.wikidata.org/sparql?query=%0ASELECT+%28COUNT%28DISTINCT+%3Fitem%29+AS+%3Fc%29+WHERE+%7B%0A++%3Fitem+wdt%3AP31+wd%3AQ5+.%0A++%3Fitem+wdt%3AP569+%3Fdate+.%0A++FILTER%28%3Fdate+%3E%3D+%22-3000-01-01T00%3A00%3A00Z%22%5E%5Exsd%3AdateTime%29%0A++%3Fitem+wikibase%3Asitelinks+%3Fsl+.%0A++FILTER%28%3Fsl+%3E%3D+40%29%0A%7D&format=json",
+    "25": "ERREUR: echec apres 4 tentatives : 504 Server Error: Gateway Timeout for url: https://query.wikidata.org/sparql?query=%0ASELECT+%28COUNT%28DISTINCT+%3Fitem%29+AS+%3Fc%29+WHERE+%7B%0A++%3Fitem+wdt%3AP31+wd%3AQ5+.%0A++%3Fitem+wdt%3AP569+%3Fdate+.%0A++FILTER%28%3Fdate+%3E%3D+%22-3000-01-01T00%3A00%3A00Z%22%5E%5Exsd%3AdateTime%29%0A++%3Fitem+wikibase%3Asitelinks+%3Fsl+.%0A++FILTER%28%3Fsl+%3E%3D+25%29%0A%7D&format=json"
+  },
+  "inventions": {
+    "100": 206,
+    "40": 1849,
+    "15": 23663
+  },
+  "oeuvres": {
+    "100": 44,
+    "40": 2277,
+    "15": 17009
+  },
+  "traites": {
+    "100": 3,
+    "40": 138,
+    "15": 660
+  },
+  "etats": {
+    "100": 241,
+    "40": 701,
+    "15": 1606
+  },
+  "catastrophes": {
+    "100": 4,
+    "40": 140,
+    "15": 988
+  }
+}

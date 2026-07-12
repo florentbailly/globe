@@ -1,0 +1,53 @@
+{
+ "categories": [
+  {
+   "id": "batailles",
+   "label": "Batailles et sièges",
+   "file": "data/batailles.json",
+   "count": 2913
+  },
+  {
+   "id": "catastrophes",
+   "label": "Catastrophes",
+   "file": "data/catastrophes.json",
+   "count": 2124
+  },
+  {
+   "id": "etats",
+   "label": "États et régimes",
+   "file": "data/etats.json",
+   "count": 2005
+  },
+  {
+   "id": "guerres",
+   "label": "Guerres et conflits",
+   "file": "data/guerres.json",
+   "count": 1098
+  },
+  {
+   "id": "inventions",
+   "label": "Inventions et découvertes",
+   "file": "data/inventions.json",
+   "count": 23663
+  },
+  {
+   "id": "oeuvres",
+   "label": "Œuvres majeures",
+   "file": "data/oeuvres.json",
+   "count": 10839
+  },
+  {
+   "id": "personnages",
+   "label": "Personnages",
+   "file": "data/personnages.json",
+   "count": 54115
+  },
+  {
+   "id": "traites",
+   "label": "Traités et accords",
+   "file": "data/traites.json",
+   "count": 1123
+  }
+ ],
+ "total": 97880
+}

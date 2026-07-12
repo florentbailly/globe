@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Histoire du monde — globe explorable</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Public+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --nuit: #0A0D16;
+  --encre: #10141F;
+  --panneau: rgba(15, 19, 32, 0.86);
+  --ivoire: #EAE4D3;
+  --muet: #9298AC;
+  --filet: #262D42;
+  --guerre: #C7364B;
+}
+* { box-sizing: border-box; margin: 0; }
+html, body { height: 100%; overflow: hidden; }
+body {
+  background: var(--nuit);
+  color: var(--ivoire);
+  font-family: "Public Sans", system-ui, sans-serif;
+  font-size: 14px;
+}
+#globe { position: absolute; inset: 0; }
+
+/* ---- Chargement ---- */
+#chargement {
+  position: absolute; inset: 0; z-index: 50;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 12px; background: var(--nuit);
+  font-family: Fraunces, Georgia, serif; font-size: 22px;
+}
+#chargement small { font-family: "Public Sans", sans-serif; font-size: 13px; color: var(--muet); }
+
+/* ---- Millésime (signature) ---- */
+#millesime {
+  position: absolute; top: 18px; left: 50%; transform: translateX(-50%);
+  z-index: 10; text-align: center; pointer-events: none;
+  font-family: Fraunces, Georgia, serif;
+  font-variant-numeric: oldstyle-nums;
+  text-shadow: 0 2px 18px rgba(0,0,0,.8);
+}
+#millesime .an { font-size: 64px; font-weight: 600; line-height: 1; letter-spacing: 0.01em; }
+#millesime .ere { font-size: 15px; color: var(--muet); letter-spacing: 0.14em; text-transform: uppercase; margin-top: 2px; }
+
+/* ---- Légende / couches ---- */
+#legende {
+  position: absolute; top: 18px; left: 18px; z-index: 10;
+  background: var(--panneau); backdrop-filter: blur(8px);
+  border: 1px solid var(--filet); border-radius: 10px;
+  padding: 12px 14px; max-width: 240px;
+}
+#legende h1 {
+  font-family: Fraunces, Georgia, serif; font-weight: 600;
+  font-size: 17px; margin-bottom: 10px;
+}
+.couche {
+  display: flex; align-items: center; gap: 8px;
+  padding: 3px 0; cursor: pointer; user-select: none;
+}
+.couche .pastille { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+.couche .nb { margin-left: auto; color: var(--muet); font-size: 12px; font-variant-numeric: tabular-nums; }
+.couche.off { opacity: 0.38; }
+.couche.off .pastille { background: var(--muet) !important; }
+#indice-zoom { margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--filet);
+  font-size: 12px; color: var(--muet); }
+
+/* ---- Périodes en cours ---- */
+#periodes {
+  position: absolute; left: 18px; bottom: 96px; z-index: 10;
+  display: flex; flex-direction: column; gap: 6px; max-width: 300px;
+}
+.periode {
+  background: var(--panneau); backdrop-filter: blur(8px);
+  border: 1px solid var(--filet); border-left: 3px solid var(--guerre);
+  border-radius: 6px; padding: 5px 10px; cursor: pointer; font-size: 13px;
+}
+.periode small { color: var(--muet); margin-left: 6px; font-variant-numeric: tabular-nums; }
+.periode:hover { border-color: var(--guerre); }
+
+/* ---- Barre temporelle ---- */
+#barre {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 10;
+  background: linear-gradient(transparent, rgba(10,13,22,.92) 30%);
+  padding: 18px 22px 14px;
+}
+#controles { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+button, select, input[type=text] {
+  background: var(--encre); color: var(--ivoire);
+  border: 1px solid var(--filet); border-radius: 6px;
+  font: inherit; padding: 5px 11px; cursor: pointer;
+}
+button:hover, select:hover { border-color: var(--muet); }
+button:focus-visible, select:focus-visible, input:focus-visible { outline: 2px solid var(--ivoire); outline-offset: 1px; }
+#lecture { min-width: 96px; font-weight: 600; }
+#vitesse-effective { color: var(--muet); font-size: 12px; min-width: 70px; }
+#saut { width: 84px; cursor: text; }
+#controles .sep { flex: 1; }
+#raccourcis { color: var(--muet); font-size: 12px; }
+#frise { width: 100%; accent-color: var(--ivoire); cursor: pointer; }
+#graduations { display: flex; justify-content: space-between; color: var(--muet);
+  font-size: 11px; font-variant-numeric: tabular-nums; margin-top: 2px; }
+
+/* ---- Panneau de détail ---- */
+#detail {
+  position: absolute; top: 0; right: 0; bottom: 0; z-index: 20;
+  width: min(380px, 92vw);
+  background: var(--panneau); backdrop-filter: blur(12px);
+  border-left: 1px solid var(--filet);
+  transform: translateX(102%); transition: transform .25s ease;
+  display: flex; flex-direction: column;
+}
+@media (prefers-reduced-motion: reduce) { #detail { transition: none; } }
+#detail.ouvert { transform: none; }
+#detail header {
+  display: flex; align-items: baseline; gap: 10px;
+  padding: 16px 18px 10px; border-bottom: 1px solid var(--filet);
+}
+#detail h2 { font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 20px; flex: 1; }
+#detail .fermer { background: none; border: none; color: var(--muet); font-size: 20px; padding: 0 4px; }
+#detail .corps { padding: 14px 18px; overflow-y: auto; line-height: 1.55; }
+#detail .meta { color: var(--muet); font-size: 12.5px; margin-bottom: 10px; }
+#detail img { width: 100%; border-radius: 8px; margin-bottom: 12px; }
+#detail a { color: var(--ivoire); }
+.etiquette-point { background: var(--panneau); border: 1px solid var(--filet);
+  border-radius: 6px; padding: 4px 9px; font-size: 12.5px; color: var(--ivoire); }
+</style>
+</head>
+<body>
+
+<div id="globe"></div>
+
+<div id="chargement">Histoire du monde<small id="progression">chargement…</small></div>
+
+<div id="millesime"><div class="an">—</div><div class="ere"></div></div>
+
+<nav id="legende" aria-label="Couches">
+  <h1>Histoire du monde</h1>
+  <div id="couches"></div>
+  <div id="indice-zoom"></div>
+</nav>
+
+<div id="periodes" aria-label="Périodes en cours"></div>
+
+<div id="barre">
+  <div id="controles">
+    <button id="lecture">▶ Lecture</button>
+    <select id="multiplicateur" aria-label="Vitesse">
+      <option value="0.25">×¼</option><option value="0.5">×½</option>
+      <option value="1" selected>×1</option><option value="2">×2</option>
+      <option value="4">×4</option><option value="8">×8</option>
+    </select>
+    <span id="vitesse-effective"></span>
+    <input type="text" id="saut" placeholder="-52, 1789…" aria-label="Aller à l'année">
+    <button id="aller">Aller</button>
+    <span class="sep"></span>
+    <span id="raccourcis">espace : lecture · ← → : ±10 ans</span>
+  </div>
+  <input type="range" id="frise" min="-3000" max="2026" step="1" value="-3000" aria-label="Frise chronologique">
+  <div id="graduations">
+    <span>3000 av. J.-C.</span><span>2000 av. J.-C.</span><span>1000 av. J.-C.</span>
+    <span>an 1</span><span>1000</span><span>2026</span>
+  </div>
+</div>
+
+<aside id="detail" aria-label="Détail de l'événement">
+  <header><h2></h2><button class="fermer" aria-label="Fermer">✕</button></header>
+  <div class="corps"></div>
+</aside>
+
+<script src="https://unpkg.com/globe.gl@2.34.5/dist/globe.gl.min.js"></script>
+<script>
+"use strict";
+
+/* ================= Configuration ================= */
+
+const COULEURS = {
+  batailles:   "#E4573D",
+  guerres:     "#C7364B",
+  personnages: "#E9C46A",
+  inventions:  "#4FA3D1",
+  oeuvres:     "#B07FD8",
+  traites:     "#56C596",
+  etats:       "#E98A3C",
+  catastrophes:"#93A0B4",
+};
+const AN_MIN = -3000, AN_MAX = 2026;
+const DUREE_TRACE_S = 3.5;      // un événement reste ~3,5 s à l'écran
+const MAX_POINTS = 3000;
+const RAFRAICHISSEMENT_MS = 150;
+
+// vitesse adaptative : années d'histoire par seconde selon l'époque
+function ansParSeconde(an) {
+  return an < 0 ? 25 : an < 1500 ? 10 : an < 1900 ? 3 : 1;
+}
+// palier de zoom sémantique selon l'altitude caméra
+function palierMax(altitude) {
+  return altitude > 1.7 ? 1 : altitude > 0.7 ? 2 : 3;
+}
+
+/* ================= État ================= */
+
+const etat = {
+  cats: new Map(),        // id -> {label, events[], actif}
+  guerres: [],            // événements avec durée
+  geoGuerres: new Map(),  // qid guerre -> {lat, lng, rayon} (centroïde des batailles)
+  an: AN_MIN,
+  lecture: false,
+  mult: 1,
+  altitude: 2.5,
+  guerresActives: new Map(),
+};
+
+/* ================= Utilitaires ================= */
+
+const $ = s => document.querySelector(s);
+function fmtAn(an) {
+  const a = Math.floor(an);
+  return a < 0 ? { an: String(-a), ere: "av. J.-C." } : { an: String(a), ere: "apr. J.-C." };
+}
+// premier index dont l'année est >= an (événements triés par build_data.py)
+function bornInf(evts, an) {
+  let lo = 0, hi = evts.length;
+  while (lo < hi) { const mid = (lo + hi) >> 1; evts[mid].year < an ? lo = mid + 1 : hi = mid; }
+  return lo;
+}
+function hexAlpha(hex, a) {
+  const n = Math.round(Math.max(0, Math.min(1, a)) * 255);
+  return hex + n.toString(16).padStart(2, "0");
+}
+
+/* ================= Chargement des données ================= */
+
+async function charger() {
+  const manifest = await (await fetch("data/manifest.json")).json();
+  let fait = 0;
+  await Promise.all(manifest.categories.map(async c => {
+    const d = await (await fetch(c.file)).json();
+    etat.cats.set(c.id, { label: d.label, events: d.events, actif: true });
+    $("#progression").textContent = `${++fait}/${manifest.categories.length} couches — ${manifest.total.toLocaleString("fr")} événements`;
+  }));
+  const g = etat.cats.get("guerres");
+  if (g) etat.guerres = g.events.filter(e => e.year_end && e.year_end > e.year);
+  calculerGeoGuerres();
+}
+
+// centroïde et rayon de chaque guerre à partir de ses batailles enfants (P361)
+function calculerGeoGuerres() {
+  const b = etat.cats.get("batailles");
+  if (!b) return;
+  const groupes = new Map();
+  for (const e of b.events) {
+    if (!e.parent || !e.coord) continue;
+    if (!groupes.has(e.parent)) groupes.set(e.parent, []);
+    groupes.get(e.parent).push(e.coord);
+  }
+  for (const [qid, coords] of groupes) {
+    if (coords.length < 2) continue;
+    const lng = coords.reduce((s, c) => s + c[0], 0) / coords.length;
+    const lat = coords.reduce((s, c) => s + c[1], 0) / coords.length;
+    const rayon = Math.max(...coords.map(c => Math.hypot(c[0] - lng, c[1] - lat)));
+    etat.geoGuerres.set(qid, { lat, lng, rayon: Math.min(Math.max(rayon, 3), 22) });
+  }
+}
+
+/* ================= Globe ================= */
+
+let globe;
+function initGlobe() {
+  globe = Globe()(document.getElementById("globe"))
+    .globeImageUrl("https://unpkg.com/three-globe/example/img/earth-dark.jpg")
+    .bumpImageUrl("https://unpkg.com/three-globe/example/img/earth-topology.png")
+    .backgroundImageUrl("https://unpkg.com/three-globe/example/img/night-sky.png")
+    .atmosphereColor("#3a4a7b")
+    .atmosphereAltitude(0.18)
+    .pointAltitude(0.008)
+    .pointRadius(d => d.r)
+    .pointColor(d => d.c)
+    .pointsTransitionDuration(0)
+    .pointLabel(d => `<div class="etiquette-point">${d.ev.label ?? d.ev.qid} · ${fmtAn(d.ev.year).an} ${d.ev.year < 0 ? "av. J.-C." : ""}</div>`)
+    .onPointClick(d => ouvrirDetail(d.ev, d.cat))
+    .ringColor(() => t => `rgba(199,54,75,${0.5 * (1 - t)})`)
+    .ringMaxRadius(d => d.rayon)
+    .ringPropagationSpeed(d => d.rayon / 2.5)
+    .ringRepeatPeriod(1600)
+    .onZoom(pov => {
+      if (Math.abs(pov.altitude - etat.altitude) > 0.05) {
+        etat.altitude = pov.altitude;
+        majIndiceZoom();
+        rafraichir();
+      }
+    });
+  globe.pointOfView({ lat: 30, lng: 20, altitude: 2.5 });
+}
+
+/* ================= Sélection des événements visibles ================= */
+
+function rafraichir() {
+  const an = etat.an;
+  const trace = DUREE_TRACE_S * ansParSeconde(an) * etat.mult;
+  const palier = palierMax(etat.altitude);
+
+  // guerres actives (périodes-conteneurs)
+  etat.guerresActives.clear();
+  for (const g of etat.guerres) {
+    if (g.year <= an && an <= g.year_end) etat.guerresActives.set(g.qid, g);
+  }
+
+  const points = [];
+  for (const [id, cat] of etat.cats) {
+    if (!cat.actif || id === "guerres") continue;
+    const couleur = COULEURS[id] ?? "#ccc";
+    const debut = bornInf(cat.events, an - trace);
+    for (let i = debut; i < cat.events.length; i++) {
+      const e = cat.events[i];
+      if (e.year > an) break;
+      if (!e.coord || e.tier > palier) continue;
+      // éclatement hiérarchique : de loin, les enfants d'une guerre active restent
+      // regroupés dans son halo ; ils apparaissent en zoomant
+      if (etat.altitude >= 1.2 && e.parent && etat.guerresActives.has(e.parent)) continue;
+      const age = (an - e.year) / trace;
+      points.push({
+        lat: e.coord[1], lng: e.coord[0],
+        r: e.tier === 1 ? 0.75 : e.tier === 2 ? 0.48 : 0.3,
+        c: hexAlpha(couleur, 1 - 0.8 * age),
+        ev: e, cat: id,
+      });
+    }
+  }
+  points.sort((a, b) => b.ev.sl - a.ev.sl);
+  globe.pointsData(points.slice(0, MAX_POINTS));
+
+  // anneaux des guerres actives (halo au centroïde des batailles)
+  const anneaux = [];
+  for (const [qid, g] of etat.guerresActives) {
+    const geo = etat.geoGuerres.get(qid);
+    if (geo && (g.tier <= palier || etat.altitude < 1.2)) anneaux.push({ ...geo, ev: g });
+  }
+  globe.ringsData(anneaux);
+  majPeriodes();
+}
+
+/* ================= Interface ================= */
+
+function majMillesime() {
+  const f = fmtAn(etat.an);
+  $("#millesime .an").textContent = f.an;
+  $("#millesime .ere").textContent = f.ere;
+  const y = Math.floor(etat.an);
+  if (String($("#frise").value) !== String(y) && document.activeElement !== $("#frise")) {
+    $("#frise").value = y;
+  }
+  $("#vitesse-effective").textContent =
+    `${(ansParSeconde(etat.an) * etat.mult).toLocaleString("fr")} ans/s`;
+}
+
+function majIndiceZoom() {
+  const p = palierMax(etat.altitude);
+  $("#indice-zoom").textContent =
+    p === 1 ? "Vue monde — événements majeurs"
+    : p === 2 ? "Vue régionale — plus de détails"
+    : "Vue rapprochée — tous les événements";
+}
+
+function majPeriodes() {
+  const boite = $("#periodes");
+  const guerres = [...etat.guerresActives.values()]
+    .sort((a, b) => b.sl - a.sl).slice(0, 8);
+  boite.replaceChildren(...guerres.map(g => {
+    const div = document.createElement("div");
+    div.className = "periode";
+    div.innerHTML = `${g.label}<small>${fmtAn(g.year).an}${g.year < 0 ? " av. J.-C." : ""} – ${fmtAn(g.year_end).an}</small>`;
+    div.onclick = () => ouvrirDetail(g, "guerres");
+    return div;
+  }));
+}
+
+function construireLegende() {
+  const boite = $("#couches");
+  for (const [id, cat] of etat.cats) {
+    const div = document.createElement("div");
+    div.className = "couche";
+    div.setAttribute("role", "button");
+    div.tabIndex = 0;
+    div.innerHTML = `<span class="pastille" style="background:${COULEURS[id] ?? "#ccc"}"></span>
+      <span>${cat.label}</span><span class="nb">${cat.events.length.toLocaleString("fr")}</span>`;
+    const basculer = () => { cat.actif = !cat.actif; div.classList.toggle("off", !cat.actif); rafraichir(); };
+    div.onclick = basculer;
+    div.onkeydown = e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); basculer(); } };
+    boite.appendChild(div);
+  }
+}
+
+/* ---- Fenêtre de détail (résumé Wikipédia) ---- */
+
+async function ouvrirDetail(ev, catId) {
+  mettreEnPause();
+  const panneau = $("#detail");
+  panneau.classList.add("ouvert");
+  const f = fmtAn(ev.year);
+  $("#detail h2").textContent = ev.label ?? ev.qid;
+  const corps = $("#detail .corps");
+  const periode = ev.year_end ? ` – ${fmtAn(ev.year_end).an}` : "";
+  const catLabel = etat.cats.get(catId)?.label ?? catId;
+  corps.innerHTML = `<div class="meta">${catLabel} · ${f.an} ${f.ere}${periode}</div><p>Chargement du résumé…</p>`;
+
+  const essais = [];
+  if (ev.fr) essais.push(["fr", ev.fr]);
+  if (ev.en) essais.push(["en", ev.en]);
+  for (const [langue, titre] of essais) {
+    try {
+      const r = await fetch(`https://${langue}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(titre.replaceAll(" ", "_"))}`);
+      if (!r.ok) continue;
+      const d = await r.json();
+      corps.innerHTML = `<div class="meta">${catLabel} · ${f.an} ${f.ere}${periode}</div>
+        ${d.thumbnail ? `<img src="${d.thumbnail.source}" alt="">` : ""}
+        <p>${d.extract ?? ""}</p>
+        <p style="margin-top:12px"><a href="${d.content_urls.desktop.page}" target="_blank" rel="noopener">
+          Lire l'article sur Wikipédia (${langue})</a></p>`;
+      return;
+    } catch { /* essai suivant */ }
+  }
+  corps.innerHTML = `<div class="meta">${catLabel} · ${f.an} ${f.ere}${periode}</div>
+    <p>Pas d'article Wikipédia trouvé pour cet événement.</p>
+    <p style="margin-top:12px"><a href="https://www.wikidata.org/wiki/${ev.qid}" target="_blank" rel="noopener">
+      Voir la fiche Wikidata</a></p>`;
+}
+$("#detail .fermer").onclick = () => $("#detail").classList.remove("ouvert");
+
+/* ---- Contrôles du temps ---- */
+
+function mettreEnPause() {
+  etat.lecture = false;
+  $("#lecture").textContent = "▶ Lecture";
+}
+function basculerLecture() {
+  if (etat.an >= AN_MAX) etat.an = AN_MIN;   // rejouer depuis le début
+  etat.lecture = !etat.lecture;
+  $("#lecture").textContent = etat.lecture ? "⏸ Figer" : "▶ Lecture";
+}
+function allerA(an) {
+  etat.an = Math.max(AN_MIN, Math.min(AN_MAX, an));
+  majMillesime();
+  rafraichir();
+}
+
+$("#lecture").onclick = basculerLecture;
+$("#multiplicateur").onchange = e => { etat.mult = parseFloat(e.target.value); majMillesime(); };
+$("#frise").oninput = e => allerA(parseInt(e.target.value, 10));
+$("#aller").onclick = () => {
+  const v = parseInt($("#saut").value, 10);
+  if (!Number.isNaN(v)) allerA(v);
+};
+$("#saut").onkeydown = e => { if (e.key === "Enter") $("#aller").click(); };
+document.addEventListener("keydown", e => {
+  if (e.target.tagName === "INPUT" || e.target.tagName === "SELECT") return;
+  if (e.code === "Space") { e.preventDefault(); basculerLecture(); }
+  if (e.key === "ArrowLeft") allerA(etat.an - 10);
+  if (e.key === "ArrowRight") allerA(etat.an + 10);
+});
+
+/* ---- Boucle temporelle ---- */
+
+let dernierT = null, dernierRafraichi = 0;
+function boucle(t) {
+  if (dernierT !== null && etat.lecture) {
+    const dt = (t - dernierT) / 1000;
+    etat.an += ansParSeconde(etat.an) * etat.mult * dt;
+    if (etat.an >= AN_MAX) { etat.an = AN_MAX; mettreEnPause(); }
+    majMillesime();
+    if (t - dernierRafraichi > RAFRAICHISSEMENT_MS) {
+      dernierRafraichi = t;
+      rafraichir();
+    }
+  }
+  dernierT = t;
+  requestAnimationFrame(boucle);
+}
+
+/* ================= Démarrage ================= */
+
+(async function () {
+  initGlobe();
+  try {
+    await charger();
+  } catch (err) {
+    $("#progression").textContent =
+      "Erreur de chargement — lancer d'abord build_data.py, puis servir via « python -m http.server -d web »";
+    console.error(err);
+    return;
+  }
+  construireLegende();
+  majIndiceZoom();
+  majMillesime();
+  rafraichir();
+  $("#chargement").remove();
+  requestAnimationFrame(boucle);
+})();
+</script>
+</body>
+</html>
