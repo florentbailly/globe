@@ -127,6 +127,35 @@ button:focus-visible, select:focus-visible, input:focus-visible { outline: 2px s
 #detail a { color: var(--ivoire); }
 .etiquette-point { background: var(--panneau); border: 1px solid var(--filet);
   border-radius: 6px; padding: 4px 9px; font-size: 12.5px; color: var(--ivoire); }
+
+/* ---- Menu repliable & fond de carte ---- */
+#legende-tete { display: flex; align-items: center; gap: 8px; }
+#legende-tete h1 { flex: 1; margin-bottom: 0; }
+#plier { background: none; border: none; color: var(--muet); font-size: 15px; padding: 2px 6px; }
+#legende-corps { margin-top: 10px; }
+#legende.replie #legende-corps { display: none; }
+#fond { width: 100%; margin-top: 10px; font-size: 12.5px; }
+#reglage-frontieres { display: flex; align-items: center; gap: 7px; padding: 2px 0 4px 18px; }
+#reglage-frontieres label { color: var(--muet); font-size: 11.5px; }
+#reglage-frontieres input { flex: 1; accent-color: var(--ivoire); cursor: pointer; }
+#attribution { margin-top: 8px; font-size: 11px; color: var(--muet); }
+
+/* ---- Mobile ---- */
+@media (max-width: 700px) {
+  #millesime { top: 10px; }
+  #millesime .an { font-size: 38px; }
+  #millesime .ere { font-size: 11px; letter-spacing: 0.1em; }
+  #legende { top: 10px; left: 10px; max-width: 205px; padding: 9px 11px; font-size: 13px; }
+  #legende h1 { font-size: 15px; }
+  #raccourcis { display: none; }
+  #periodes { left: 10px; bottom: 118px; max-width: 230px; max-height: 130px; overflow-y: auto; }
+  .periode { font-size: 12px; padding: 4px 8px; }
+  #detail { width: 100vw; }
+  #barre { padding: 12px 12px 10px; }
+  #controles { gap: 7px; }
+  #saut { width: 70px; }
+  #graduations span:nth-child(even) { display: none; }
+}
 </style>
 </head>
 <body>
@@ -138,9 +167,19 @@ button:focus-visible, select:focus-visible, input:focus-visible { outline: 2px s
 <div id="millesime"><div class="an">—</div><div class="ere"></div></div>
 
 <nav id="legende" aria-label="Couches">
-  <h1>Histoire du monde</h1>
-  <div id="couches"></div>
-  <div id="indice-zoom"></div>
+  <div id="legende-tete">
+    <h1>Histoire du monde</h1>
+    <button id="plier" aria-label="Replier le menu" aria-expanded="true">▾</button>
+  </div>
+  <div id="legende-corps">
+    <div id="couches"></div>
+    <select id="fond" aria-label="Fond de carte">
+      <option value="physique" selected>Fond physique — relief, fleuves</option>
+      <option value="satellite">Fond satellite — zoom profond</option>
+    </select>
+    <div id="indice-zoom"></div>
+    <div id="attribution">Fond de carte © Esri</div>
+  </div>
 </nav>
 
 <div id="periodes" aria-label="Périodes en cours"></div>
@@ -171,7 +210,7 @@ button:focus-visible, select:focus-visible, input:focus-visible { outline: 2px s
   <div class="corps"></div>
 </aside>
 
-<script src="https://unpkg.com/globe.gl@2.34.5/dist/globe.gl.min.js"></script>
+<script src="https://unpkg.com/globe.gl@2.46.1/dist/globe.gl.min.js"></script>
 <script>
 "use strict";
 
@@ -212,6 +251,7 @@ const etat = {
   mult: 1,
   altitude: 2.5,
   guerresActives: new Map(),
+  frontieres: { actif: true, opacite: 0.34, annees: [], instantane: null, cache: new Map(), jeton: 0 },
 };
 
 /* ================= Utilitaires ================= */
@@ -245,6 +285,10 @@ async function charger() {
   const g = etat.cats.get("guerres");
   if (g) etat.guerres = g.events.filter(e => e.year_end && e.year_end > e.year);
   calculerGeoGuerres();
+  try {
+    const idx = await (await fetch("data/borders/index.json")).json();
+    etat.frontieres.annees = [...idx.years].sort((a, b) => a - b);
+  } catch { /* frontières non téléchargées (fetch_borders.py) : couche masquée */ }
 }
 
 // centroïde et rayon de chaque guerre à partir de ses batailles enfants (P361)
@@ -268,24 +312,53 @@ function calculerGeoGuerres() {
 
 /* ================= Globe ================= */
 
+// Fonds de carte tuiles : nets a tous les niveaux de zoom, details progressifs
+const FONDS = {
+  physique: {   // relief peint, fleuves, montagnes — style atlas, sans toponymes modernes
+    url: (x, y, l) => `https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/${l}/${y}/${x}`,
+    max: 8,
+  },
+  satellite: {  // imagerie satellite, zoom tres profond
+    url: (x, y, l) => `https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/${l}/${y}/${x}`,
+    max: 17,
+  },
+};
+function appliquerFond(id) {
+  const f = FONDS[id];
+  globe.globeTileEngineUrl(f.url).globeTileEngineMaxLevel(f.max);
+}
+
 let globe;
 function initGlobe() {
   globe = Globe()(document.getElementById("globe"))
-    .globeImageUrl("https://unpkg.com/three-globe/example/img/earth-dark.jpg")
-    .bumpImageUrl("https://unpkg.com/three-globe/example/img/earth-topology.png")
     .backgroundImageUrl("https://unpkg.com/three-globe/example/img/night-sky.png")
     .atmosphereColor("#3a4a7b")
     .atmosphereAltitude(0.18)
-    .pointAltitude(0.008)
+    .pointAltitude(0.01)
     .pointRadius(d => d.r)
     .pointColor(d => d.c)
     .pointsTransitionDuration(0)
     .pointLabel(d => `<div class="etiquette-point">${d.ev.label ?? d.ev.qid} · ${fmtAn(d.ev.year).an} ${d.ev.year < 0 ? "av. J.-C." : ""}</div>`)
     .onPointClick(d => ouvrirDetail(d.ev, d.cat))
+    .ringAltitude(0.006)
     .ringColor(() => t => `rgba(199,54,75,${0.5 * (1 - t)})`)
     .ringMaxRadius(d => d.rayon)
     .ringPropagationSpeed(d => d.rayon / 2.5)
     .ringRepeatPeriod(1600)
+    .polygonGeoJsonGeometry(d => d.geometry)
+    .polygonCapColor(d => d.__couleur)
+    .polygonSideColor(() => "rgba(0,0,0,0)")
+    .polygonStrokeColor(() => "rgba(245,240,225,0.85)")
+    .polygonAltitude(0.003)
+    .polygonsTransitionDuration(0)
+    .polygonLabel(d => {
+      const p = d.properties ?? {};
+      const dep = p.SUBJECTO ? ` · dépend de ${p.SUBJECTO}` : p.PARTOF ? ` · ${p.PARTOF}` : "";
+      const f = fmtAn(etat.frontieres.instantane ?? 0);
+      return `<div class="etiquette-point"><b>${p.NAME ?? "?"}</b>${dep}<br>
+        <span style="color:var(--muet)">frontières ≈ ${f.an} ${f.ere}</span></div>`;
+    })
+    .onPolygonClick(d => ouvrirDetailEntite(d.properties ?? {}))
     .onZoom(pov => {
       if (Math.abs(pov.altitude - etat.altitude) > 0.05) {
         etat.altitude = pov.altitude;
@@ -294,6 +367,85 @@ function initGlobe() {
       }
     });
   globe.pointOfView({ lat: 30, lng: 20, altitude: 2.5 });
+  appliquerFond("physique");
+}
+
+/* ================= Frontières historiques ================= */
+
+// instantané applicable : le dernier dont l'année est <= année courante
+function instantanePour(an) {
+  const a = etat.frontieres.annees;
+  if (!a.length) return null;
+  let choix = a[0];
+  for (const y of a) { if (y <= an) choix = y; else break; }
+  return choix;
+}
+
+function couleurEntite(nom) {
+  let h = 0;
+  for (const c of nom ?? "") h = (h * 31 + c.charCodeAt(0)) >>> 0;
+  return `hsla(${h % 360}, 52%, 60%, ${etat.frontieres.opacite})`;
+}
+
+async function majFrontieres() {
+  const fr = etat.frontieres;
+  if (!fr.annees.length) return;
+  if (!fr.actif) {
+    if (fr.instantane !== null) { fr.instantane = null; globe.polygonsData([]); majLegendeFrontieres(); }
+    return;
+  }
+  const cible = instantanePour(Math.floor(etat.an));
+  if (cible === fr.instantane) return;
+  const jeton = ++fr.jeton;
+  let feats = fr.cache.get(cible);
+  if (!feats) {
+    try {
+      const d = await (await fetch(`data/borders/${cible}.json`)).json();
+      // les zones sans NAME (terra nullius, mers) sont écartées : le fond de carte reste visible
+      feats = d.features.filter(f => f.geometry && f.properties?.NAME);
+      for (const f of feats) f.__couleur = couleurEntite(f.properties?.NAME);
+      fr.cache.set(cible, feats);
+      if (fr.cache.size > 8) fr.cache.delete(fr.cache.keys().next().value);
+    } catch { return; }
+  }
+  if (jeton !== fr.jeton) return;   // une année plus récente a été demandée entre-temps
+  fr.instantane = cible;
+  globe.polygonsData(feats);
+  majLegendeFrontieres();
+}
+
+function majLegendeFrontieres() {
+  const nb = $("#frontieres-annee");
+  if (!nb) return;
+  if (!etat.frontieres.actif || etat.frontieres.instantane === null) { nb.textContent = ""; return; }
+  const f = fmtAn(etat.frontieres.instantane);
+  nb.textContent = `≈ ${f.an}${etat.frontieres.instantane < 0 ? " av. J.-C." : ""}`;
+}
+
+async function ouvrirDetailEntite(p) {
+  mettreEnPause();
+  $("#detail").classList.add("ouvert");
+  $("#detail h2").textContent = p.NAME ?? "Entité inconnue";
+  const corps = $("#detail .corps");
+  const f = fmtAn(etat.frontieres.instantane ?? 0);
+  const meta = `<div class="meta">Entité politique · frontières ≈ ${f.an} ${f.ere}` +
+    (p.SUBJECTO ? ` · dépend de ${p.SUBJECTO}` : "") + `</div>`;
+  corps.innerHTML = `${meta}<p>Chargement…</p>`;
+  try {
+    const r = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent((p.NAME ?? "").replaceAll(" ", "_"))}`);
+    if (r.ok) {
+      const d = await r.json();
+      if (d.type !== "disambiguation" && d.extract) {
+        corps.innerHTML = `${meta}${d.thumbnail ? `<img src="${d.thumbnail.source}" alt="">` : ""}
+          <p>${d.extract}</p>
+          <p style="margin-top:12px"><a href="${d.content_urls.desktop.page}" target="_blank" rel="noopener">Lire l'article sur Wikipédia (en)</a></p>`;
+        return;
+      }
+    }
+  } catch { /* repli ci-dessous */ }
+  corps.innerHTML = `${meta}<p>Pas d'article Wikipédia directement associé à ce nom d'entité.</p>
+    <p style="color:var(--muet);font-size:12.5px;margin-top:10px">Frontières indicatives — précision de l'ordre du siècle
+    pour les époques anciennes (source : historical-basemaps).</p>`;
 }
 
 /* ================= Sélection des événements visibles ================= */
@@ -303,13 +455,25 @@ function rafraichir() {
   const trace = DUREE_TRACE_S * ansParSeconde(an) * etat.mult;
   const palier = palierMax(etat.altitude);
 
-  // guerres actives (périodes-conteneurs)
+  // guerres actives (périodes-conteneurs) — vidées si la couche est désactivée,
+  // auquel cas leurs batailles enfants redeviennent visibles individuellement
   etat.guerresActives.clear();
-  for (const g of etat.guerres) {
-    if (g.year <= an && an <= g.year_end) etat.guerresActives.set(g.qid, g);
+  if (etat.cats.get("guerres")?.actif ?? true) {
+    for (const g of etat.guerres) {
+      if (g.year <= an && an <= g.year_end) etat.guerresActives.set(g.qid, g);
+    }
   }
 
   const points = [];
+  // marqueur cliquable au centroïde de chaque guerre active
+  for (const [qid, g] of etat.guerresActives) {
+    const geo = etat.geoGuerres.get(qid);
+    if (geo) points.push({
+      lat: geo.lat, lng: geo.lng, r: 0.9,
+      c: hexAlpha(COULEURS.guerres, 0.95),
+      ev: g, cat: "guerres",
+    });
+  }
   for (const [id, cat] of etat.cats) {
     if (!cat.actif || id === "guerres") continue;
     const couleur = COULEURS[id] ?? "#ccc";
@@ -340,6 +504,7 @@ function rafraichir() {
     if (geo && (g.tier <= palier || etat.altitude < 1.2)) anneaux.push({ ...geo, ev: g });
   }
   globe.ringsData(anneaux);
+  majFrontieres();
   majPeriodes();
 }
 
@@ -380,6 +545,38 @@ function majPeriodes() {
 
 function construireLegende() {
   const boite = $("#couches");
+  if (etat.frontieres.annees.length) {
+    const div = document.createElement("div");
+    div.className = "couche";
+    div.setAttribute("role", "button");
+    div.tabIndex = 0;
+    div.innerHTML = `<span class="pastille" style="background:none;border:1.5px solid var(--ivoire)"></span>
+      <span>Frontières historiques</span><span class="nb" id="frontieres-annee"></span>`;
+    const basculer = () => { etat.frontieres.actif = !etat.frontieres.actif; div.classList.toggle("off", !etat.frontieres.actif); rafraichir(); };
+    div.onclick = basculer;
+    div.onkeydown = e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); basculer(); } };
+    boite.appendChild(div);
+    const reglage = document.createElement("div");
+    reglage.id = "reglage-frontieres";
+    const etiquette = document.createElement("label");
+    etiquette.textContent = "Intensité";
+    const curseur = document.createElement("input");
+    curseur.type = "range";
+    curseur.min = "0.08"; curseur.max = "0.7"; curseur.step = "0.02";
+    curseur.value = String(etat.frontieres.opacite);
+    curseur.setAttribute("aria-label", "Intensité des frontières");
+    curseur.oninput = e => {
+      etat.frontieres.opacite = parseFloat(e.target.value);
+      for (const feats of etat.frontieres.cache.values()) {
+        for (const f of feats) f.__couleur = couleurEntite(f.properties?.NAME);
+      }
+      const inst = etat.frontieres.instantane;
+      if (inst !== null) globe.polygonsData([...(etat.frontieres.cache.get(inst) ?? [])]);
+    };
+    reglage.appendChild(etiquette);
+    reglage.appendChild(curseur);
+    boite.appendChild(reglage);
+  }
   for (const [id, cat] of etat.cats) {
     const div = document.createElement("div");
     div.className = "couche";
@@ -488,11 +685,19 @@ function boucle(t) {
     await charger();
   } catch (err) {
     $("#progression").textContent =
-      "Erreur de chargement — lancer d'abord build_data.py, puis servir via « python -m http.server -d web »";
+      "Erreur de chargement — lancer d'abord build_data.py, puis servir la racine du projet (ex. « npx serve » ou « python -m http.server »)";
     console.error(err);
     return;
   }
   construireLegende();
+  const legende = $("#legende"), plier = $("#plier");
+  plier.onclick = () => {
+    const replie = legende.classList.toggle("replie");
+    plier.textContent = replie ? "▸" : "▾";
+    plier.setAttribute("aria-expanded", String(!replie));
+  };
+  if (window.matchMedia && matchMedia("(max-width: 700px)").matches) plier.onclick();
+  $("#fond").onchange = e => appliquerFond(e.target.value);
   majIndiceZoom();
   majMillesime();
   rafraichir();

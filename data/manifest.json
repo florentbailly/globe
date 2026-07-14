@@ -34,13 +34,13 @@
    "id": "oeuvres",
    "label": "Œuvres majeures",
    "file": "data/oeuvres.json",
-   "count": 10839
+   "count": 3348
   },
   {
    "id": "personnages",
    "label": "Personnages",
    "file": "data/personnages.json",
-   "count": 54115
+   "count": 19777
   },
   {
    "id": "traites",
@@ -49,5 +49,5 @@
    "count": 1123
   }
  ],
- "total": 97880
+ "total": 56051
 }
